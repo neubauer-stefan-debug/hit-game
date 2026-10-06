@@ -2,38 +2,50 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#0a0d12">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HIT!">
   <title>HIT! – Triff den Moment</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json?v=3.2.0">
+  <link rel="icon" href="icon.svg?v=3.2.0" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3.2.0">
+  <link rel="stylesheet" href="styles.css?v=3.2.0">
 </head>
 <body data-theme="boy" data-clock="clean">
   <div class="bg-layer" aria-hidden="true"></div>
   <div id="app">
     <header class="topbar">
-      <button id="homeBtn" class="icon-btn hidden" aria-label="Home">←</button>
+      <button id="backBtn" class="icon-btn hidden" aria-label="Zurück">←</button>
       <div class="brand-wrap">
         <div class="brand">HIT!</div>
         <div class="brand-sub">TRIFF DEN MOMENT</div>
       </div>
       <div class="top-actions">
-        <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+        <button id="settingsBtn" class="icon-btn" aria-label="Einstellungen">⚙</button>
         <button id="scoreBtn" class="icon-btn" aria-label="Highscores">🏆</button>
       </div>
     </header>
+
     <main id="screen"></main>
+
+    <nav class="app-nav" aria-label="Navigation">
+      <button data-nav="home" class="nav-btn active"><span>⌂</span><small>Home</small></button>
+      <button data-nav="levels" class="nav-btn"><span>▦</span><small>Level</small></button>
+      <button data-nav="round" class="nav-btn"><span>●</span><small>Round</small></button>
+      <button data-nav="scores" class="nav-btn"><span>♛</span><small>Scores</small></button>
+      <button data-nav="settings" class="nav-btn"><span>⚙</span><small>Settings</small></button>
+    </nav>
+
     <footer>© 2026 Stefan Neubauer · HIT! · Alle Rechte vorbehalten</footer>
   </div>
 
   <template id="home-template">
     <section class="hero">
-      <div class="eyebrow">ONE BUTTON. TWO TAPS.</div>
+      <div class="theme-kicker" id="themeKicker"></div>
       <h1>HIT!</h1>
-      <p class="lead">Wie nah kommst du an den perfekten Moment?</p>
+      <p class="lead">Ein Button. Zwei Taps. Der perfekte Moment liegt dazwischen.</p>
       <div class="hero-pills">
         <span class="hero-pill" id="currentThemeTag"></span>
         <span class="hero-pill" id="currentClockTag"></span>
@@ -42,34 +54,31 @@
     </section>
 
     <section class="mode-grid">
-      <button class="mode-card" data-mode="level">
-        <span class="mode-tag">SOLO · STORY OF SKILL</span>
+      <button class="mode-card level-card" data-mode="level">
+        <span class="mode-tag">SOLO · 100 LEVEL</span>
         <h3>LEVEL RUN</h3>
-        <p>100 Level. Längere Freischaltungen. Deutlich härter. Ein echter Progress-Run.</p>
-        <span class="mode-cta">RUN STARTEN →</span>
+        <p>Kapitel, Sterne, Unlocks und immer engere Toleranzen.</p>
+        <span class="mode-cta">LEVEL MAP →</span>
       </button>
-      <button class="mode-card" data-mode="party">
+      <button class="mode-card round-card" data-mode="party">
         <span class="mode-tag">1–6 SPIELER</span>
         <h3>HIT! ROUND</h3>
-        <p>Eine Zeit für alle. Wer die kleinste Abweichung hat, gewinnt die Runde.</p>
+        <p>Eine Zielzeit. Alle nacheinander. Danach zählt nur Präzision.</p>
         <span class="mode-cta">RUNDE STARTEN →</span>
       </button>
     </section>
 
-    <section class="home-info">
-      <div class="info-card">
-        <strong>Progress</strong>
-        <span id="homeProgress"></span>
-      </div>
-      <div class="info-card">
-        <strong>Online Status</strong>
-        <span id="homeStatus"></span>
-      </div>
+    <section class="home-stats">
+      <div class="stat-card"><span>PROGRESS</span><strong id="homeProgress">–</strong></div>
+      <div class="stat-card"><span>STARS</span><strong id="homeStars">–</strong></div>
+      <div class="stat-card"><span>ONLINE</span><strong id="homeStatus">–</strong></div>
     </section>
+
+    <section class="unlock-strip" id="nextUnlock"></section>
   </template>
 
-  <script src="firebase-config.js"></script>
-  <script src="highscore.js"></script>
-  <script src="app.js"></script>
+  <script src="firebase-config.js?v=3.2.0"></script>
+  <script src="highscore.js?v=3.2.0"></script>
+  <script src="app.js?v=3.2.0"></script>
 </body>
 </html>
