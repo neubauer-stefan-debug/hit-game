@@ -1,18 +1,8 @@
-/*
-  HIT! – Firebase-Konfiguration
-
-  V2 funktioniert vollständig ohne Firebase und speichert Highscores lokal.
-  Für die spätere Online-Bestenliste tragen wir hier nur deine Firebase-Web-App-Konfiguration ein
-  und aktivieren im nächsten Schritt den Firebase-Adapter in highscore.js.
-
-  Beispiel:
-  window.HIT_FIREBASE_CONFIG = {
-    apiKey: "...",
-    authDomain: "...",
-    projectId: "...",
-    storageBucket: "...",
-    messagingSenderId: "...",
-    appId: "..."
-  };
-*/
-window.HIT_FIREBASE_CONFIG = null;
+window.HIT_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCj5mEHbfLDhJT_-LxaVzB0wyPGJvpnZQQ",
+  authDomain: "hit-700f8.firebaseapp.com",
+  projectId: "hit-700f8",
+  storageBucket: "hit-700f8.firebasestorage.app",
+  messagingSenderId: "245618230117",
+  appId: "1:245618230117:web:71e7ff62199cddc78ed78c"
+};

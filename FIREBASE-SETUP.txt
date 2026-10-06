@@ -1,0 +1,47 @@
+HIT! V2.1 – Firebase Online Highscores
+
+Voraussetzungen in Firebase:
+1. Authentication > Sign-in method > Anonymous aktivieren.
+2. Firestore Database anlegen.
+3. Firestore Rules veröffentlichen.
+
+Empfohlene Rules:
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /highscores/{scoreId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly([
+          'name',
+          'target',
+          'result',
+          'diff',
+          'absDiff',
+          'mode',
+          'theme',
+          'createdAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 20
+        && request.resource.data.target is number
+        && request.resource.data.target >= 1.5
+        && request.resource.data.target <= 100
+        && request.resource.data.result is number
+        && request.resource.data.result >= 0
+        && request.resource.data.result <= 120
+        && request.resource.data.diff is number
+        && request.resource.data.absDiff is number
+        && request.resource.data.absDiff >= 0
+        && request.resource.data.absDiff <= 120
+        && request.resource.data.mode == 'party'
+        && request.resource.data.theme in ['boy','girl','machine','football'];
+
+      allow update, delete: if false;
+    }
+  }
+}

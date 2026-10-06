@@ -429,28 +429,67 @@ function renderLevelFinish(exact){
   $("#runAgain").addEventListener("click",renderLevelIntro);
   $("#finishMenu").addEventListener("click",renderHome);
 }
-async function renderScores(){
+async function renderScores(filter="all"){
   $("#homeBtn").classList.remove("hidden");
-  const scores=await HitScores.top(30);
+
+  // Wir laden etwas mehr und filtern Datum clientseitig.
+  const allScores=await HitScores.top(100);
+  const now=new Date();
+
+  const startOfToday=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const startOfWeek=new Date(startOfToday);
+  const day=(startOfWeek.getDay()+6)%7; // Montag = 0
+  startOfWeek.setDate(startOfWeek.getDate()-day);
+
+  const scores=allScores.filter(s=>{
+    const d=new Date(s.createdAt);
+    if(filter==="today") return d>=startOfToday;
+    if(filter==="week") return d>=startOfWeek;
+    return true;
+  }).slice(0,30);
+
+  const online=HitScores.provider==="firebase";
+
   $("#screen").innerHTML=`
     <h1 class="screen-title">HIGHSCORES</h1>
-    <p class="screen-sub">${HitScores.provider==="local"?"Aktuell lokal auf diesem Gerät. Die Datenstruktur ist bereits für die spätere Online-Bestenliste vorbereitet.":"Online-Bestenliste"}</p>
+    <p class="screen-sub">
+      ${online
+        ? "Gemeinsame Online-Bestenliste · nur HIT! ROUND"
+        : "Offline-Modus · aktuell werden lokale Ergebnisse angezeigt"}
+    </p>
+
     <section class="panel">
+      <div class="choice-row" style="margin-bottom:18px">
+        <button class="choice ${filter==="all"?"active":""}" data-score-filter="all">ALL TIME</button>
+        <button class="choice ${filter==="today"?"active":""}" data-score-filter="today">HEUTE</button>
+        <button class="choice ${filter==="week"?"active":""}" data-score-filter="week">DIESE WOCHE</button>
+      </div>
+
       ${scores.length?`<div class="score-table">${scores.map((s,i)=>{
         const d=new Date(s.createdAt);
         return `<div class="score-row">
           <strong>${i+1}.</strong>
-          <div><strong>${escapeHtml(s.name)}</strong><br><span class="muted">Target ${fmt(s.target)} · Hit ${fmt(s.result)}</span></div>
+          <div>
+            <strong>${escapeHtml(s.name)}</strong><br>
+            <span class="muted">Target ${fmt(s.target)} · Hit ${fmt(s.result)}</span>
+          </div>
           <strong>${fmt(s.absDiff)} s</strong>
           <span class="score-date muted">${d.toLocaleDateString("de-DE")}</span>
         </div>`;
-      }).join("")}</div>`:`<div class="empty">Noch kein Highscore. Erst spielen, dann angeben.</div>`}
+      }).join("")}</div>`:`<div class="empty">In diesem Zeitraum noch kein Highscore.</div>`}
     </section>
-    <div class="actions"><button id="clearScores" class="secondary">LOKALE HIGHSCORES LÖSCHEN</button></div>`;
-  $("#clearScores").addEventListener("click",async()=>{
-    if(confirm("Lokale Highscores wirklich löschen?")){
-      await HitScores.clearLocal();renderScores();
-    }
+
+    <section class="panel">
+      <div class="muted">
+        ${online
+          ? "ONLINE · Firebase Firestore verbunden"
+          : "OFFLINE · lokaler Fallback aktiv"}
+      </div>
+    </section>
+  `;
+
+  $$("[data-score-filter]").forEach(btn=>{
+    btn.addEventListener("click",()=>renderScores(btn.dataset.scoreFilter));
   });
 }
 
