@@ -3,8 +3,8 @@
   "short_name": "HIT!",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#090b10",
-  "theme_color": "#090b10",
+  "background_color": "#0a0d12",
+  "theme_color": "#0a0d12",
   "description": "Ein Button. Zwei Taps. Triff die Zielzeit so genau wie möglich.",
   "icons": [
     {

@@ -1,12 +1,6 @@
 
-/*
-  HIT! Online Highscores
-  - Firebase Firestore + anonyme Authentifizierung
-  - lokaler Fallback, falls Firebase nicht erreichbar ist
-  - API für app.js bleibt unverändert: HitScores.save(), HitScores.top(), HitScores.clearLocal()
-*/
 window.HitScores = (() => {
-  const LOCAL_KEY = "hit_scores_v2";
+  const LOCAL_KEY = "hit_scores_v3";
   const cfg = window.HIT_FIREBASE_CONFIG;
 
   let provider = "local";
@@ -28,33 +22,20 @@ window.HitScores = (() => {
   }
 
   function getLocal(){
-    try {
-      return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]");
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]"); }
+    catch { return []; }
   }
 
   function setLocal(entries){
-    localStorage.setItem(
-      LOCAL_KEY,
-      JSON.stringify(
-        entries
-          .sort((a,b) => a.absDiff - b.absDiff || new Date(a.createdAt) - new Date(b.createdAt))
-          .slice(0, 100)
-      )
-    );
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(
+      entries.sort((a,b)=>a.absDiff-b.absDiff || new Date(a.createdAt)-new Date(b.createdAt)).slice(0,150)
+    ));
   }
 
   async function initFirebase(){
     if (!cfg) return false;
-
     try {
-      const [
-        { initializeApp },
-        { getAuth, signInAnonymously },
-        { getFirestore, collection, addDoc, getDocs, query, orderBy, limit }
-      ] = await Promise.all([
+      const [{ initializeApp }, { getAuth, signInAnonymously }, { getFirestore, collection, addDoc, getDocs, query, orderBy, limit }] = await Promise.all([
         import("https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"),
         import("https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js"),
         import("https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js")
@@ -63,14 +44,13 @@ window.HitScores = (() => {
       const app = initializeApp(cfg);
       const auth = getAuth(app);
       await signInAnonymously(auth);
-
       firestore = getFirestore(app);
       firebaseFns = { collection, addDoc, getDocs, query, orderBy, limit };
       firebaseReady = true;
       provider = "firebase";
       return true;
     } catch (err) {
-      console.warn("HIT! Firebase nicht verfügbar – lokaler Fallback aktiv.", err);
+      console.warn("Firebase nicht verfügbar – lokaler Fallback aktiv.", err);
       firebaseReady = false;
       provider = "local";
       return false;
@@ -81,8 +61,6 @@ window.HitScores = (() => {
 
   async function save(entries){
     const normalized = entries.map(normalize);
-
-    // Immer lokal mitschreiben – praktisch als Offline-/Fallback-Sicherung.
     setLocal([...getLocal(), ...normalized]);
 
     await ready;
@@ -92,16 +70,16 @@ window.HitScores = (() => {
       const col = firebaseFns.collection(firestore, "highscores");
       await Promise.all(normalized.map(entry => firebaseFns.addDoc(col, entry)));
       provider = "firebase";
+      return normalized;
     } catch (err) {
-      console.warn("Online-Highscore konnte nicht gespeichert werden.", err);
+      console.warn("Online-Speichern fehlgeschlagen.", err);
       provider = "local";
+      return getLocal();
     }
-    return normalized;
   }
 
-  async function top(limitCount = 50){
+  async function top(limitCount = 100){
     await ready;
-
     if (firebaseReady) {
       try {
         const q = firebaseFns.query(
@@ -113,14 +91,11 @@ window.HitScores = (() => {
         provider = "firebase";
         return snap.docs.map(d => ({ id: d.id, ...d.data() }));
       } catch (err) {
-        console.warn("Online-Highscores konnten nicht geladen werden.", err);
+        console.warn("Online-Lesen fehlgeschlagen.", err);
         provider = "local";
       }
     }
-
-    return getLocal()
-      .sort((a,b) => a.absDiff - b.absDiff || new Date(a.createdAt) - new Date(b.createdAt))
-      .slice(0, limitCount);
+    return getLocal().sort((a,b)=>a.absDiff-b.absDiff || new Date(a.createdAt)-new Date(b.createdAt)).slice(0,limitCount);
   }
 
   async function clearLocal(){

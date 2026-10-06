@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#090b10">
+  <meta name="theme-color" content="#0a0d12">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>HIT! – Triff den Moment</title>
@@ -11,49 +11,60 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-theme="boy">
-  <div class="theme-art" aria-hidden="true"></div>
+<body data-theme="boy" data-clock="clean">
+  <div class="bg-layer" aria-hidden="true"></div>
   <div id="app">
     <header class="topbar">
-      <button id="homeBtn" class="icon-btn hidden" aria-label="Zum Hauptmenü">←</button>
-      <div class="brand">HIT!</div>
+      <button id="homeBtn" class="icon-btn hidden" aria-label="Home">←</button>
+      <div class="brand-wrap">
+        <div class="brand">HIT!</div>
+        <div class="brand-sub">TRIFF DEN MOMENT</div>
+      </div>
       <div class="top-actions">
-        <button id="settingsBtn" class="icon-btn" aria-label="Einstellungen">⚙</button>
+        <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
         <button id="scoreBtn" class="icon-btn" aria-label="Highscores">🏆</button>
       </div>
     </header>
-
     <main id="screen"></main>
-
     <footer>© 2026 Stefan Neubauer · HIT! · Alle Rechte vorbehalten</footer>
   </div>
 
   <template id="home-template">
     <section class="hero">
-      <div class="eyebrow">TRIFF DEN MOMENT.</div>
+      <div class="eyebrow">ONE BUTTON. TWO TAPS.</div>
       <h1>HIT!</h1>
-      <p class="lead">Ein Button. Zwei Taps. Der Rest ist Timing.</p>
-      <div class="current-style" id="currentStyle"></div>
+      <p class="lead">Wie nah kommst du an den perfekten Moment?</p>
+      <div class="hero-pills">
+        <span class="hero-pill" id="currentThemeTag"></span>
+        <span class="hero-pill" id="currentClockTag"></span>
+        <span class="hero-pill" id="currentSoundTag"></span>
+      </div>
     </section>
 
     <section class="mode-grid">
-      <button class="mode-card level-card" data-mode="level">
-        <span class="mode-tag">SOLO · 10 LEVEL</span>
+      <button class="mode-card" data-mode="level">
+        <span class="mode-tag">SOLO · STORY OF SKILL</span>
         <h3>LEVEL RUN</h3>
-        <p>Jedes Level enger. Verfehlst du die Grenze, bleibt das Level stehen.</p>
+        <p>100 Level. Längere Freischaltungen. Deutlich härter. Ein echter Progress-Run.</p>
         <span class="mode-cta">RUN STARTEN →</span>
       </button>
-
-      <button class="mode-card party-card" data-mode="party">
+      <button class="mode-card" data-mode="party">
         <span class="mode-tag">1–6 SPIELER</span>
         <h3>HIT! ROUND</h3>
-        <p>Eine Zielzeit. Alle nacheinander. Am Ende gibt’s Ranking und klare Ansagen.</p>
+        <p>Eine Zeit für alle. Wer die kleinste Abweichung hat, gewinnt die Runde.</p>
         <span class="mode-cta">RUNDE STARTEN →</span>
       </button>
     </section>
 
-    <section class="home-tip">
-      <strong>Tipp:</strong> Mit jedem geschafften Level schaltest du neue Buttons frei.
+    <section class="home-info">
+      <div class="info-card">
+        <strong>Progress</strong>
+        <span id="homeProgress"></span>
+      </div>
+      <div class="info-card">
+        <strong>Online Status</strong>
+        <span id="homeStatus"></span>
+      </div>
     </section>
   </template>
 
