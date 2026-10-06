@@ -3,79 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0b0d12">
+  <meta name="theme-color" content="#090b10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>HIT! – Triff den Moment</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="boy">
+  <div class="theme-art" aria-hidden="true"></div>
   <div id="app">
     <header class="topbar">
       <button id="homeBtn" class="icon-btn hidden" aria-label="Zum Hauptmenü">←</button>
       <div class="brand">HIT!</div>
-      <button id="scoreBtn" class="icon-btn" aria-label="Highscores">🏆</button>
+      <div class="top-actions">
+        <button id="settingsBtn" class="icon-btn" aria-label="Einstellungen">⚙</button>
+        <button id="scoreBtn" class="icon-btn" aria-label="Highscores">🏆</button>
+      </div>
     </header>
 
     <main id="screen"></main>
 
-    <footer>
-      © 2026 Stefan Neubauer · HIT! · Alle Rechte vorbehalten
-    </footer>
+    <footer>© 2026 Stefan Neubauer · HIT! · Alle Rechte vorbehalten</footer>
   </div>
 
   <template id="home-template">
     <section class="hero">
       <div class="eyebrow">TRIFF DEN MOMENT.</div>
       <h1>HIT!</h1>
-      <p class="lead">Ein Button. Zwei Taps. Wie nah kommst du an die Zeit?</p>
-    </section>
-
-    <section class="panel">
-      <h2>Dein Look</h2>
-      <div class="theme-grid">
-        <button class="theme-card active" data-theme-choice="boy">
-          <span class="theme-dot boy-dot"></span>
-          <strong>BOY</strong>
-          <small>clean · dark · electric</small>
-        </button>
-        <button class="theme-card" data-theme-choice="girl">
-          <span class="theme-dot girl-dot"></span>
-          <strong>GIRL</strong>
-          <small>dark · sharp · magenta</small>
-        </button>
-        <button class="theme-card" data-theme-choice="machine">
-          <span class="theme-dot machine-dot"></span>
-          <strong>MACHINE</strong>
-          <small>tech · chrome · signal</small>
-        </button>
-      </div>
+      <p class="lead">Ein Button. Zwei Taps. Der Rest ist Timing.</p>
+      <div class="current-style" id="currentStyle"></div>
     </section>
 
     <section class="mode-grid">
-      <button class="mode-card" data-mode="level">
-        <span class="mode-tag">SOLO</span>
+      <button class="mode-card level-card" data-mode="level">
+        <span class="mode-tag">SOLO · 10 LEVEL</span>
         <h3>LEVEL RUN</h3>
-        <p>10 Level. Immer präziser. Verlierst du, spielst du das Level nochmal.</p>
-        <span class="mode-cta">START RUN →</span>
+        <p>Jedes Level enger. Verfehlst du die Grenze, bleibt das Level stehen.</p>
+        <span class="mode-cta">RUN STARTEN →</span>
       </button>
-      <button class="mode-card" data-mode="party">
+
+      <button class="mode-card party-card" data-mode="party">
         <span class="mode-tag">1–6 SPIELER</span>
         <h3>HIT! ROUND</h3>
-        <p>Alle spielen dieselbe Zielzeit. Danach gibt’s Ranking, Respekt – und etwas Schadenfreude.</p>
+        <p>Eine Zielzeit. Alle nacheinander. Am Ende gibt’s Ranking und klare Ansagen.</p>
         <span class="mode-cta">RUNDE STARTEN →</span>
       </button>
     </section>
 
-    <section class="panel">
-      <div class="panel-head">
-        <h2>Button wählen</h2>
-        <span id="unlockHint" class="muted"></span>
-      </div>
-      <div id="skinGrid" class="skin-grid"></div>
+    <section class="home-tip">
+      <strong>Tipp:</strong> Mit jedem geschafften Level schaltest du neue Buttons frei.
     </section>
   </template>
 
+  <script src="firebase-config.js"></script>
+  <script src="highscore.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
