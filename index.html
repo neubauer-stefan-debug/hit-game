@@ -8,29 +8,25 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="HIT!">
   <title>HIT! – Triff den Moment</title>
-  <link rel="manifest" href="manifest.json?v=3.2.0">
-  <link rel="icon" href="icon.svg?v=3.2.0" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3.2.0">
-  <link rel="stylesheet" href="styles.css?v=3.2.0">
+  <link rel="manifest" href="manifest.json?v=3.3.0">
+  <link rel="icon" href="icon.svg?v=3.3.0" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3.3.0">
+  <link rel="stylesheet" href="styles.css?v=3.3.0">
 </head>
 <body data-theme="boy" data-clock="clean">
   <div class="bg-layer" aria-hidden="true"></div>
+
   <div id="app">
     <header class="topbar">
-      <button id="backBtn" class="icon-btn hidden" aria-label="Zurück">←</button>
-      <div class="brand-wrap">
+      <div class="brand-wrap" aria-label="HIT!">
         <div class="brand">HIT!</div>
         <div class="brand-sub">TRIFF DEN MOMENT</div>
-      </div>
-      <div class="top-actions">
-        <button id="settingsBtn" class="icon-btn" aria-label="Einstellungen">⚙</button>
-        <button id="scoreBtn" class="icon-btn" aria-label="Highscores">🏆</button>
       </div>
     </header>
 
     <main id="screen"></main>
 
-    <nav class="app-nav" aria-label="Navigation">
+    <nav id="appNav" class="app-nav" aria-label="Navigation">
       <button data-nav="home" class="nav-btn active"><span>⌂</span><small>Home</small></button>
       <button data-nav="levels" class="nav-btn"><span>▦</span><small>Level</small></button>
       <button data-nav="round" class="nav-btn"><span>●</span><small>Round</small></button>
@@ -77,8 +73,8 @@
     <section class="unlock-strip" id="nextUnlock"></section>
   </template>
 
-  <script src="firebase-config.js?v=3.2.0"></script>
-  <script src="highscore.js?v=3.2.0"></script>
-  <script src="app.js?v=3.2.0"></script>
+  <script src="firebase-config.js?v=3.3.0"></script>
+  <script src="highscore.js?v=3.3.0"></script>
+  <script src="app.js?v=3.3.0"></script>
 </body>
 </html>

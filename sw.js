@@ -1,5 +1,5 @@
-const CACHE="hit-v3.2.0";
-const CORE=["./","./index.html?v=3.2.0","./styles.css?v=3.2.0","./app.js?v=3.2.0","./highscore.js?v=3.2.0","./firebase-config.js?v=3.2.0","./manifest.json?v=3.2.0","./icon-192.png","./icon-512.png"];
+const CACHE="hit-v3.3.0";
+const CORE=["./","./index.html?v=3.3.0","./styles.css?v=3.3.0","./app.js?v=3.3.0","./highscore.js?v=3.3.0","./firebase-config.js?v=3.3.0","./manifest.json?v=3.3.0","./icon-192.png","./icon-512.png"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE).catch(()=>{})))});
 self.addEventListener("activate",e=>{e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim()})())});
 self.addEventListener("fetch",e=>{

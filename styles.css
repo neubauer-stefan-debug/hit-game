@@ -51,3 +51,103 @@ body[data-clock="analog"] .timer{font-size:0}.analog-face{display:none;width:min
 .progress-line{height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin:10px 0 15px}.progress-line span{height:100%;display:block;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}.result-card{text-align:center;padding:36px 20px;position:relative;overflow:hidden}.result-big{font-size:clamp(64px,14vw,126px);font-weight:1000;letter-spacing:-6px;line-height:1}.result-diff{font-size:27px;font-weight:950;color:var(--accent);margin-top:14px}.result-comment{font-size:clamp(21px,4vw,34px);font-weight:950;margin:24px auto 7px;max-width:680px}.result-detail{color:var(--muted);font-size:13px}.result-meter{margin:23px auto 4px;max-width:520px;height:9px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}.result-meter span{display:block;height:100%;width:0;background:var(--accent);border-radius:999px;transition:width 1.05s cubic-bezier(.2,.8,.2,1)}.result-stars{font-size:25px;letter-spacing:3px;margin:16px 0 2px}.unlock-toast{margin:18px auto 0;max-width:560px;padding:13px 15px;border-radius:16px;background:color-mix(in srgb,var(--good) 15%,var(--panel));border:1px solid color-mix(in srgb,var(--good) 35%,transparent);font-weight:850}
 .ranking{display:grid;gap:9px}.rank-row{display:grid;grid-template-columns:50px 1fr auto;gap:10px;align-items:center;padding:14px 15px;border:var(--edge);border-radius:15px;background:var(--panel2)}.rank-pos{font-weight:1000;color:var(--accent)}.rank-name{font-weight:900}.rank-score{text-align:right;font-variant-numeric:tabular-nums}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:950;letter-spacing:1px;background:rgba(255,255,255,.07);margin-left:7px}.score-table{display:grid;gap:7px}.score-row{display:grid;grid-template-columns:38px 1fr auto auto;gap:9px;align-items:center;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.empty{text-align:center;color:var(--muted);padding:32px 0}.online-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;background:var(--good)}.offline-dot{background:#ffb24f}
 @media(max-width:760px){#app{padding-left:14px;padding-right:14px}.mode-grid,.setup-grid,.settings-grid{grid-template-columns:1fr}.home-stats{grid-template-columns:1fr 1fr}.home-stats .stat-card:last-child{grid-column:1/-1}.skin-grid{grid-template-columns:repeat(3,1fr)}.clock-grid,.sound-grid{grid-template-columns:1fr 1fr}.chapter-row{grid-template-columns:repeat(2,1fr)}.level-grid{grid-template-columns:repeat(5,1fr)}.hero{padding-top:38px}.hero h1{letter-spacing:-5px}.timer{letter-spacing:-5px}.score-row{grid-template-columns:32px 1fr auto}.score-date{display:none}.app-nav{bottom:max(7px,env(safe-area-inset-bottom));}.nav-btn small{font-size:8px}}
+
+/* ===== HIT! 3.3 – app shell + stronger theme worlds ===== */
+:root{
+  --headline-font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --body-font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body{font-family:var(--body-font)}
+body[data-theme="boy"]{--headline-font:"Arial Black",Impact,"Avenir Next Condensed",sans-serif;--body-font:"Avenir Next","Segoe UI",sans-serif}
+body[data-theme="girl"]{--headline-font:"Arial Rounded MT Bold","Avenir Next",Trebuchet MS,sans-serif;--body-font:"Avenir Next",Trebuchet MS,"Segoe UI",sans-serif}
+body[data-theme="machine"]{--headline-font:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;--body-font:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+body[data-theme="football"]{--headline-font:"Arial Narrow","Avenir Next Condensed","Roboto Condensed",Arial,sans-serif;--body-font:"Avenir Next","Segoe UI",Arial,sans-serif}
+
+#app{padding-bottom:122px}
+.topbar{justify-content:center;height:68px;pointer-events:none}
+.brand-wrap{pointer-events:none;position:relative}
+.brand,.brand-sub,.hero h1,.screen-title,.mode-card h3,.target,.result-big,.chapter-title strong{font-family:var(--headline-font)}
+.app-nav{touch-action:manipulation}
+.nav-btn{min-height:54px;touch-action:manipulation}
+.nav-btn:active{transform:scale(.96)}
+
+/* BOY / Action Manga */
+body[data-theme="boy"] .brand{transform:skew(-7deg);text-shadow:3px 3px 0 rgba(85,168,255,.22)}
+body[data-theme="boy"] .brand-sub{transform:skew(-7deg)}
+body[data-theme="boy"] .screen-title{font-style:italic;text-transform:uppercase;letter-spacing:-4px;text-shadow:5px 5px 0 rgba(85,168,255,.12)}
+body[data-theme="boy"] .panel{position:relative;clip-path:polygon(0 0,96% 0,100% 12px,100% 100%,4% 100%,0 calc(100% - 12px));border-radius:12px}
+body[data-theme="boy"] .panel::after{content:"";position:absolute;right:10px;top:10px;width:46px;height:5px;background:linear-gradient(90deg,var(--accent),transparent);transform:skew(-25deg);pointer-events:none}
+body[data-theme="boy"] .choice,body[data-theme="boy"] .primary,body[data-theme="boy"] .secondary{border-radius:10px;transform:skew(-2deg)}
+body[data-theme="boy"] .timer-box{border-radius:10px;box-shadow:9px 9px 0 rgba(85,168,255,.08)}
+body[data-theme="boy"] .target{font-style:italic}
+body[data-theme="boy"] .app-nav{border-radius:16px;background:rgba(12,20,36,.94)}
+body[data-theme="boy"] .nav-btn.active{box-shadow:inset 0 -3px 0 var(--accent)}
+
+/* GIRL / Pop Manga – deliberately glossy and round, without candy overload */
+body[data-theme="girl"] .brand{background:linear-gradient(135deg,#fff 5%,#ffd2eb 42%,#ff69b5 82%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 4px 12px rgba(255,95,182,.18))}
+body[data-theme="girl"] .brand-wrap::after{content:"✦";position:absolute;right:-20px;top:-6px;color:var(--accent);font-size:15px}
+body[data-theme="girl"] .screen-title{letter-spacing:-2px;background:linear-gradient(135deg,#fff,#ffcce7 45%,#ff66b6);-webkit-background-clip:text;color:transparent}
+body[data-theme="girl"] .panel{position:relative;border-radius:34px;border-color:rgba(255,165,214,.16);box-shadow:0 18px 50px rgba(255,71,166,.07),var(--shadow)}
+body[data-theme="girl"] .panel::after{content:"✦  ·  ♡";position:absolute;right:18px;top:13px;color:rgba(255,164,214,.36);font-size:12px;letter-spacing:5px;pointer-events:none}
+body[data-theme="girl"] .choice,body[data-theme="girl"] .primary,body[data-theme="girl"] .secondary,body[data-theme="girl"] .level-btn{border-radius:999px}
+body[data-theme="girl"] .mode-card{border-radius:38px;background:linear-gradient(155deg,rgba(255,255,255,.08),rgba(255,91,179,.035))}
+body[data-theme="girl"] .timer-box{border-radius:34px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,95,182,.035));box-shadow:inset 0 0 26px rgba(255,95,182,.035)}
+body[data-theme="girl"] .app-nav{border-radius:30px;background:rgba(31,14,37,.95)}
+body[data-theme="girl"] .nav-btn{border-radius:22px}
+
+/* MACHINE / terminal system */
+body[data-theme="machine"] .brand::before{content:"[";color:var(--accent2);margin-right:3px}body[data-theme="machine"] .brand::after{content:"]";color:var(--accent2);margin-left:3px}
+body[data-theme="machine"] .brand{letter-spacing:-1px;font-size:26px}
+body[data-theme="machine"] .brand-sub{letter-spacing:1px;text-transform:uppercase}
+body[data-theme="machine"] .screen-title{text-transform:uppercase;letter-spacing:2px;font-size:clamp(32px,6vw,60px)}
+body[data-theme="machine"] .screen-title::before{content:"> ";color:var(--accent2)}
+body[data-theme="machine"] .panel,body[data-theme="machine"] .mode-card,body[data-theme="machine"] .stat-card{border-radius:3px;border-color:rgba(98,244,255,.20);box-shadow:inset 0 0 0 1px rgba(98,244,255,.025),0 18px 46px rgba(0,0,0,.38)}
+body[data-theme="machine"] .panel{position:relative}
+body[data-theme="machine"] .panel::before{content:"// SYS_PANEL";position:absolute;top:7px;right:9px;color:rgba(98,244,255,.34);font-size:8px;letter-spacing:1px;pointer-events:none}
+body[data-theme="machine"] .choice,body[data-theme="machine"] .primary,body[data-theme="machine"] .secondary,body[data-theme="machine"] .level-btn{border-radius:2px;text-transform:uppercase;letter-spacing:.5px}
+body[data-theme="machine"] .timer-box{border-radius:2px;border-color:rgba(98,244,255,.30);background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px),#061013;box-shadow:0 0 24px rgba(98,244,255,.07)}
+body[data-theme="machine"] .target{letter-spacing:1px}
+body[data-theme="machine"] .app-nav{border-radius:4px;background:rgba(6,15,18,.97);border-color:rgba(98,244,255,.22)}
+body[data-theme="machine"] .nav-btn{border-radius:2px;text-transform:uppercase}
+body[data-theme="machine"] .nav-btn.active{outline:1px solid rgba(98,244,255,.22)}
+
+/* FOOTBALL / stadium scoreboard */
+body[data-theme="football"] .topbar::after{content:"";position:absolute;bottom:4px;left:18%;right:18%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.55}
+body[data-theme="football"] .brand{font-stretch:condensed;letter-spacing:-1px;text-shadow:0 4px 0 rgba(0,0,0,.22)}
+body[data-theme="football"] .screen-title{text-transform:uppercase;font-stretch:condensed;letter-spacing:-2px}
+body[data-theme="football"] .panel{position:relative;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(7,20,10,.32));border-color:rgba(191,255,89,.13)}
+body[data-theme="football"] .panel::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:repeating-linear-gradient(90deg,var(--accent) 0 28px,var(--accent2) 28px 56px);opacity:.65;border-radius:16px 16px 0 0;pointer-events:none}
+body[data-theme="football"] .mode-card{border-radius:14px}
+body[data-theme="football"] .choice,body[data-theme="football"] .primary,body[data-theme="football"] .secondary{border-radius:10px}
+body[data-theme="football"] .timer-box{border-radius:10px;background:#07130a;border:2px solid rgba(191,255,89,.16);box-shadow:inset 0 0 0 3px rgba(255,255,255,.015)}
+body[data-theme="football"] .timer{font-family:"Arial Narrow","Avenir Next Condensed",Arial,sans-serif;letter-spacing:-3px}
+body[data-theme="football"] .app-nav{border-radius:14px;background:rgba(8,22,11,.96);border-color:rgba(191,255,89,.17)}
+body[data-theme="football"] .nav-btn.active{background:linear-gradient(180deg,rgba(191,255,89,.18),rgba(191,255,89,.07));color:#d9ff9e}
+
+/* Settings: no full re-render on taps */
+.settings-head{padding-top:8px}.settings-eyebrow{font-size:10px;color:var(--accent);letter-spacing:2px;font-weight:950}.settings-panel{scroll-margin-top:78px}.settings-note{margin:12px 0 0}
+.theme-select-grid{grid-template-columns:repeat(2,1fr)}
+.theme-card{min-height:178px}.theme-demo{position:absolute;right:13px;bottom:12px;font-family:var(--headline-font);font-size:13px;font-weight:1000;opacity:.58}
+.demo-boy{transform:skew(-10deg);color:#7ab9ff}.demo-girl{color:#ff91c9}.demo-machine{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#75f6ff}.demo-football{color:#d5ff91;font-stretch:condensed}
+
+/* Additional unlock skins */
+.buzzer.heart,.buzzer.alien,.buzzer.diamond,.buzzer.rocket,.buzzer.dragon,.buzzer.skull{width:190px;height:190px;font-size:118px;filter:drop-shadow(0 20px 15px rgba(0,0,0,.34))}
+
+/* Fast transitions: app-like, never blocking */
+main{animation:hitScreenIn .12s ease-out}
+@keyframes hitScreenIn{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:none}}
+button{touch-action:manipulation}
+
+@media(max-width:760px){
+  .topbar{height:58px}
+  .brand{font-size:27px}
+  .brand-sub{font-size:8px}
+  .theme-select-grid{grid-template-columns:1fr 1fr}
+  .theme-card{min-height:164px;padding:13px}
+  .theme-card strong{font-size:16px}
+  .theme-card small{font-size:10px}
+  .app-nav{width:calc(100% - 14px);bottom:max(6px,env(safe-area-inset-bottom));padding:6px}
+  .nav-btn{min-height:50px}
+}
+.score-loading{padding:34px 10px;text-align:center;color:var(--muted);font-weight:850;letter-spacing:.6px;animation:scorePulse .8s ease-in-out infinite alternate}
+@keyframes scorePulse{from{opacity:.45}to{opacity:1}}
